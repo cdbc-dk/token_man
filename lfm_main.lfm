@@ -1,0 +1,50 @@
+object frmToken: TfrmToken
+  Left = 1003
+  Height = 246
+  Top = 463
+  Width = 363
+  Caption = 'Copy to clipboard'
+  ClientHeight = 246
+  ClientWidth = 363
+  OnCreate = FormCreate
+  OnShow = FormShow
+  LCLVersion = '2.0.10.0'
+  object edtMisc: TEdit
+    Left = 7
+    Height = 29
+    Top = 10
+    Width = 344
+    TabOrder = 0
+    Text = 'The quick brown fox jumped over the lazy dog.'
+  end
+  object btnEdit: TButton
+    Left = 7
+    Height = 25
+    Top = 45
+    Width = 203
+    Caption = 'Copy Edit to clipboard'
+    OnClick = btnEditClick
+    TabOrder = 1
+  end
+  object btnToken: TButton
+    Left = 7
+    Height = 25
+    Top = 77
+    Width = 203
+    Caption = 'Copy Token to clipboard'
+    Font.Color = clYellow
+    Font.Style = [fsBold]
+    OnClick = btnTokenClick
+    ParentFont = False
+    TabOrder = 2
+  end
+  object memPaste: TMemo
+    Left = 7
+    Height = 114
+    Top = 112
+    Width = 344
+    Font.Height = -19
+    ParentFont = False
+    TabOrder = 3
+  end
+end
