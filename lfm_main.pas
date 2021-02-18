@@ -7,7 +7,8 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
   clipbrd,
-  bc_strings;
+  bc_strings,
+  bc_datetime;
 
 type
 
@@ -28,6 +29,7 @@ type
     fTokenFilename: string;
     fTokenFile: TStringList;
   public
+    function Getparameters(var aLocation: string): boolean;
     function LoadTokenFile(aFilename: string): boolean;
     function ParseTokenString(const aTokenstring: string): boolean;
     function InsertIntoClipboard(aToken: string): boolean;
@@ -39,10 +41,7 @@ var
 implementation
 const
   DefaultFilename = '/home/bc/src/git_help/token.git';
-//const
-//  Token = 'cab6370477f1e1fd542e98a86727254a091ccb2e';
-//  The quick brown fox jumped over the lazy dog
-//  The quick brown fox jumped over the lazy dog
+
 {$R *.lfm}
 
 { TfrmToken }
@@ -51,6 +50,7 @@ procedure TfrmToken.btnEditClick(Sender: TObject);
 begin
   edtMisc.SelectAll;
   edtMisc.CopyToClipboard;
+  memPaste.Lines.Add(bcDateTimeToStr(now)+' Edit text copied succesfuly to clipboard!');
 end;
 
 procedure TfrmToken.btnTokenClick(Sender: TObject);
@@ -66,9 +66,12 @@ end;
 
 procedure TfrmToken.FormCreate(Sender: TObject);
 begin
-  { start out with default filename }
-  fTokenFilename:= DefaultFilename;
+  if Getparameters(fTokenFilename) then
+  else fTokenFilename:= DefaultFilename; { run with default filename }
   LoadTokenFile(fTokenFilename);
+  {$ifdef debug}
+    memPaste.Lines.Add(fTokenFilename+' Loaded');
+  {$endif}
 end;
 
 procedure TfrmToken.FormShow(Sender: TObject);
@@ -76,6 +79,22 @@ begin
   {$ifdef debug}
   Caption:= 'Running with default filename';
   {$endif}
+end;
+
+function TfrmToken.Getparameters(var aLocation: string): boolean;
+begin
+  aLocation:= '';
+  Result:= false;
+  if Application.ParamCount >= 2 then begin
+    if Application.Params[1] = '-l' then begin
+      aLocation:= Application.Params[2];
+      Result:= true;
+      {$ifdef debug}
+        memPaste.Lines.Add('Params[2] = '+aLocation);
+        memPaste.Lines.Add('Params[1] = '+Application.ParamCount.ToString);
+      {$endif}
+    end;
+  end;
 end;
 
 function TfrmToken.LoadTokenFile(aFilename: string): boolean;
@@ -122,7 +141,7 @@ begin
   memPaste.Lines.Add('aToken -> '+aToken);
   {$endif}
   Clipboard.AsText:= aToken; { works only in gui?!? }
-  memPaste.Lines.Add('Token copied succesfuly to clipboard!');
+  memPaste.Lines.Add(bcDateTimeToStr(now)+' Token copied succesfuly to clipboard!');
   Result:= true;
 end;
 
