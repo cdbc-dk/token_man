@@ -1,11 +1,11 @@
 object frmToken: TfrmToken
-  Left = 1003
+  Left = 750
   Height = 246
   Top = 463
-  Width = 363
+  Width = 613
   Caption = 'Copy to clipboard'
   ClientHeight = 246
-  ClientWidth = 363
+  ClientWidth = 613
   OnCreate = FormCreate
   OnShow = FormShow
   LCLVersion = '2.0.10.0'
@@ -23,7 +23,10 @@ object frmToken: TfrmToken
     Top = 45
     Width = 203
     Caption = 'Copy Edit to clipboard'
+    Font.Color = clLime
+    Font.Style = [fsBold]
     OnClick = btnEditClick
+    ParentFont = False
     TabOrder = 1
   end
   object btnToken: TButton
@@ -42,7 +45,8 @@ object frmToken: TfrmToken
     Left = 7
     Height = 114
     Top = 112
-    Width = 344
+    Width = 594
+    Anchors = [akTop, akLeft, akRight]
     Font.Height = -19
     ParentFont = False
     TabOrder = 3
