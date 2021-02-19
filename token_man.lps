@@ -3,7 +3,6 @@
   <ProjectSession>
     <Version Value="11"/>
     <BuildModes Active="Default"/>
-    <Units Count="7">
       <Unit0>
         <Filename Value="token_man.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -20,25 +19,16 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <CursorPos X="7" Y="10"/>
         <UsageCount Value="155"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="../../bc_rtl/bc_strings.pas"/>
-        <EditorIndex Value="2"/>
-        <TopLine Value="176"/>
-        <CursorPos X="19" Y="183"/>
-        <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
         <Filename Value="../../bc_rtl/bc_datetime.pas"/>
-        <EditorIndex Value="3"/>
-        <TopLine Value="220"/>
-        <CursorPos X="47" Y="229"/>
-        <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit3>
       <Unit4>
@@ -55,16 +45,6 @@
         <CursorPos X="3" Y="479"/>
         <UsageCount Value="10"/>
       </Unit5>
-      <Unit6>
-        <Filename Value="/usr/share/fpcsrc/packages/rtl-objpas/src/inc/strutils.pp"/>
-        <UnitName Value="StrUtils"/>
-        <EditorIndex Value="1"/>
-        <TopLine Value="199"/>
-        <UsageCount Value="10"/>
-        <Loaded Value="True"/>
-      </Unit6>
-    </Units>
-    <JumpHistory Count="20" HistoryIndex="19">
       <Position1>
         <Filename Value="lfm_main.pas"/>
       </Position1>
@@ -140,19 +120,10 @@
         <Filename Value="lfm_main.pas"/>
         <Caret Line="87" Column="31" TopLine="80"/>
       </Position19>
-      <Position20>
-        <Filename Value="lfm_main.pas"/>
-        <Caret Line="10" Column="7"/>
-      </Position20>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
       <Modes Count="1" ActiveMode="default">
-        <Mode0 Name="default">
-          <local>
-            <CommandLineParams Value="-h token.git"/>
-          </local>
-        </Mode0>
       </Modes>
     </RunParams>
   </ProjectSession>
