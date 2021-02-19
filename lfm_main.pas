@@ -7,6 +7,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
   clipbrd,
+  strutils,
   bc_strings,
   bc_datetime;
 
