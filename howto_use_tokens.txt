@@ -1,0 +1,7 @@
+Revision:   23.02.2021 /bc
+I'm getting too old :-D
+
+1)  When asked, enter your {username}
+2)  Next enter your {token}
+3)  Git should now push your changes to remote branch / master
+
