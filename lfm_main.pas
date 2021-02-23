@@ -78,7 +78,7 @@ end;
 procedure TfrmToken.FormShow(Sender: TObject);
 begin
   {$ifdef debug}
-  Caption:= 'Running with default filename';
+    Caption:= 'Running with default filename';
   {$endif}
 end;
 
