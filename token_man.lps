@@ -208,11 +208,6 @@
     <RunParams>
       <FormatVersion Value="2"/>
       <Modes Count="1" ActiveMode="default">
-        <Mode0 Name="default">
-          <local>
-            <CommandLineParams Value="-h token.git"/>
-          </local>
-        </Mode0>
       </Modes>
     </RunParams>
   </ProjectSession>
