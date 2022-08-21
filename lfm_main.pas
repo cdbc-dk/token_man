@@ -6,12 +6,17 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  clipbrd,
+  clipbrd, ComCtrls, ExtCtrls,
   strutils,
   bc_strings,
+  bc_types,
   bc_datetime;
 
+const
+  UnitVersion = '11.20.08.2022'; { used by tversion }
+
 type
+  { *** TfrmToken *** }
 
   { TfrmToken }
 
@@ -19,16 +24,25 @@ type
     btnEdit: TButton;
     btnToken: TButton;
     edtMisc: TEdit;
+    gbxNotifications: TGroupBox;
+    gbxHints: TGroupBox;
+    memHints: TMemo;
     memPaste: TMemo;
+    pnlToken: TPanel;
+    pnlEdit: TPanel;
+    Splitter1: TSplitter;
+    stbStatus: TStatusBar;
     procedure btnEditClick(Sender: TObject);
     procedure btnTokenClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
   protected
     fToken: string;
     fTokenString: string;
     fTokenFilename: string;
     fTokenFile: TStringList;
+    fVersion: TVersion;
   public
     function Getparameters(var aLocation: string): boolean;
     function LoadTokenFile(aFilename: string): boolean;
@@ -44,9 +58,7 @@ const
   DefaultFilename = '/home/bc/src/git_help/token.git';
 
 {$R *.lfm}
-
-{ TfrmToken }
-
+{ *** TfrmToken *** }
 procedure TfrmToken.btnEditClick(Sender: TObject);
 begin
   edtMisc.SelectAll;
@@ -59,14 +71,20 @@ begin
   if fTokenString <> '' then ParseTokenString(fTokenString);
   if InsertIntoClipboard(fToken) then begin
     {$ifdef debug}
-    memPaste.Lines.Add('Token inserted into Clipboard');
+      memPaste.Lines.Add('Token inserted into Clipboard');
     {$endif}
   end;
-//  Clipboard.AsText:= Token;
 end;
 
 procedure TfrmToken.FormCreate(Sender: TObject);
 begin
+  fVersion:= TVersion.Create(UnitVersion);
+  Left:= 753;
+  Top:= 263;
+  if bc_strings.UnitVersionAsInteger < 844510829742052 then begin
+    raise exception.Create('Error: bc_strings is too old! Must be 3.20.04.2020 or newer');
+    Halt(-1);
+  end;
   if Getparameters(fTokenFilename) then
   else fTokenFilename:= DefaultFilename; { run with default filename }
   LoadTokenFile(fTokenFilename);
@@ -75,8 +93,15 @@ begin
   {$endif}
 end;
 
+procedure TfrmToken.FormDestroy(Sender: TObject);
+begin
+  FreeAndNil(fVersion);
+end;
+
 procedure TfrmToken.FormShow(Sender: TObject);
 begin
+//  Caption:= 'Copy to clipboard, version: '+bc_datetime.UnitVersion;
+  Caption:= 'Token Manager, version: '+fVersion.AsString;
   {$ifdef debug}
     Caption:= 'Running with default filename';
   {$endif}
@@ -114,8 +139,8 @@ begin
       break;
     end;
     {$ifdef debug}
-    memPaste.Lines.Add(aFilename+' loaded');
-    memPaste.Lines.Add('TokenString = '+fTokenString);
+      memPaste.Lines.Add(aFilename+' loaded');
+      memPaste.Lines.Add('TokenString = '+fTokenString);
     {$endif}
     Result:= true;
   finally FreeAndNil(fTokenFile); end;
@@ -128,7 +153,7 @@ begin
     fToken:= bcGetFieldToken(2,aTokenstring,':');
     fToken:= trim(fToken);
     {$ifdef debug}
-    memPaste.Lines.Add('Token -> '+fToken);
+      memPaste.Lines.Add('Token -> '+fToken);
     {$endif}
     Result:= true;
   end;
@@ -139,7 +164,7 @@ begin
   Result:= false;
   { clipboard.astext calls clear }
   {$ifdef debug}
-  memPaste.Lines.Add('aToken -> '+aToken);
+    memPaste.Lines.Add('aToken -> '+aToken);
   {$endif}
   Clipboard.AsText:= aToken; { works only in gui?!? }
   memPaste.Lines.Add(bcDateTimeToStr(now)+' Token copied succesfuly to clipboard!');

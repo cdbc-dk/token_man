@@ -1,54 +1,137 @@
 object frmToken: TfrmToken
-  Left = 750
-  Height = 246
-  Top = 463
+  Left = 648
+  Height = 446
+  Top = 166
   Width = 613
+  ActiveControl = btnToken
   Caption = 'Copy to clipboard'
-  ClientHeight = 246
+  ClientHeight = 446
   ClientWidth = 613
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   OnShow = FormShow
-  LCLVersion = '2.0.10.0'
-  object edtMisc: TEdit
-    Left = 7
-    Height = 29
-    Top = 10
-    Width = 344
-    TabOrder = 0
-    Text = 'The quick brown fox jumped over the lazy dog.'
+  LCLVersion = '2.2.2.0'
+  object stbStatus: TStatusBar
+    Left = 0
+    Height = 19
+    Top = 427
+    Width = 613
+    Panels = <>
+    SimpleText = ' Tool to aid in working with GIT...'
   end
-  object btnEdit: TButton
-    Left = 7
-    Height = 25
-    Top = 45
-    Width = 203
-    Caption = 'Copy Edit to clipboard'
-    Font.Color = clLime
-    Font.Style = [fsBold]
-    OnClick = btnEditClick
-    ParentFont = False
+  object gbxNotifications: TGroupBox
+    Left = 0
+    Height = 161
+    Top = 266
+    Width = 613
+    Align = alBottom
+    Caption = ' Notifications '
+    ClientHeight = 143
+    ClientWidth = 611
     TabOrder = 1
+    object memPaste: TMemo
+      Left = 0
+      Height = 143
+      Top = 0
+      Width = 611
+      Align = alClient
+      Font.Height = -19
+      ParentFont = False
+      ScrollBars = ssAutoBoth
+      TabOrder = 0
+    end
   end
-  object btnToken: TButton
-    Left = 7
-    Height = 25
-    Top = 77
-    Width = 203
-    Caption = 'Copy Token to clipboard'
-    Font.Color = clYellow
-    Font.Style = [fsBold]
-    OnClick = btnTokenClick
-    ParentFont = False
-    TabOrder = 2
+  object Splitter1: TSplitter
+    Cursor = crVSplit
+    Left = 0
+    Height = 5
+    Top = 261
+    Width = 613
+    Align = alBottom
+    ResizeAnchor = akBottom
   end
-  object memPaste: TMemo
-    Left = 7
-    Height = 114
-    Top = 112
-    Width = 594
-    Anchors = [akTop, akLeft, akRight]
-    Font.Height = -19
-    ParentFont = False
+  object gbxHints: TGroupBox
+    Left = 0
+    Height = 161
+    Top = 100
+    Width = 613
+    Align = alClient
+    Caption = ' Hints '
+    ClientHeight = 143
+    ClientWidth = 611
     TabOrder = 3
+    object memHints: TMemo
+      Left = 0
+      Height = 143
+      Top = 0
+      Width = 611
+      Align = alClient
+      Font.Color = clYellow
+      Font.Style = [fsBold]
+      Lines.Strings = (
+        '        Git ''push changes to github.com'':'
+        '        1) { git add * }                                              '
+        '        2) { git commit -m "descriptive message here" }'
+        '        3) { git push origin branchname }'
+        '        4) { enter username: cdbc-dk, enter token } -> done.'
+        '        5) { checkout -b new_branch_name }'
+        '           //remember the new name for next push. Look in "BRANCH.git"'
+      )
+      ParentFont = False
+      ScrollBars = ssAutoBoth
+      TabOrder = 0
+    end
+  end
+  object pnlEdit: TPanel
+    Left = 0
+    Height = 50
+    Top = 0
+    Width = 613
+    Align = alTop
+    ClientHeight = 50
+    ClientWidth = 613
+    TabOrder = 4
+    object btnEdit: TButton
+      Left = 5
+      Height = 30
+      Top = 10
+      Width = 203
+      Caption = 'Copy Edit to clipboard'
+      Font.Color = clLime
+      Font.Style = [fsBold]
+      OnClick = btnEditClick
+      ParentFont = False
+      TabOrder = 0
+    end
+    object edtMisc: TEdit
+      Left = 216
+      Height = 29
+      Top = 10
+      Width = 388
+      TabOrder = 1
+      Text = 'The quick brown fox jumped over the lazy dog.'
+    end
+  end
+  object pnlToken: TPanel
+    Left = 0
+    Height = 50
+    Top = 50
+    Width = 613
+    Align = alTop
+    ClientHeight = 50
+    ClientWidth = 613
+    TabOrder = 5
+    object btnToken: TButton
+      Left = 5
+      Height = 30
+      Top = 10
+      Width = 203
+      Caption = 'Copy Token to clipboard'
+      Font.Color = clYellow
+      Font.Style = [fsBold]
+      OnClick = btnTokenClick
+      ParentFont = False
+      TabOrder = 0
+    end
   end
 end
